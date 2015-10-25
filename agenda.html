@@ -1,0 +1,156 @@
+<head>
+  <title>Agenda Online</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+     <span class="sr-only">Menu de Navegação</span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="agenda.html">Agenda de Contatos</a>
+   </div>
+   <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="index.php">Início</a></li>
+     <li><a href="#">Perfil</a></li>
+     <li><a href="#">Ajuda</a></li>
+    </ul>
+   </div>
+  </div>
+ </nav>
+
+<div id="main" class="container-fluid" style="margin-top: 50px">
+ 	<div id="top" class="row">
+		<div class="col-sm-3">
+			<h2>Contatos</h2>
+		</div>
+		<div class="col-sm-6">
+			<form action="" method="post">
+			<div class="input-group h2">
+				<input name="data[search]"  class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+
+			</div>
+			</form>
+		</div>
+		<div class="col-sm-3">
+			<a href="#" class="btn btn-primary pull-right h2 addContato">Adicionar Contatos</a>
+		</div>
+	</div>
+	<hr />
+
+ <h5 class="page-header" align="center"><strong></strong></h5>
+ 	
+ 	{{> listContato}}
+ 	
+ 	{{> addContato}}
+</div>
+
+<footer>
+	Por Alexandre Tostes - alexandreftostes@gamil.com
+
+</footer>
+
+</body>
+
+<template name="listContato">
+	<div id="list" class="row">
+		<div class="table-responsive col-md-12">
+			<table class="table table-striped" cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						
+						<th>Nome</th>
+						<th>Email</th>
+						<th>DDD</th>
+						<th>Telefone</th>
+						<th>Tipo Telefone</th>
+						<th class="actions">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each contatos}}
+						{{> contato}}
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>
+
+<template name="contato">
+	<tr>
+		<td>{{nome}}</td>
+		<td>{{email}}</td>
+		<td>{{ddd}}</td>
+		<td>{{telefone}}</td>
+		<td>{{tipo}}</td>
+		<td>
+			<a class="btn btn-success btn-xs" href="#">Visualizar</a>
+		<a class="btn btn-warning btn-xs editar" href="#">Editar</a>
+		<a class="btn btn-danger btn-xs deletar"  href="#" data-toggle="modal"  data-target="#delete-modal">Excluir</a>
+		</td>
+	</tr>
+</template>
+
+<template name="addContato">
+	<form class="modal fade">
+	  <input type="hidden" name="id">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Agenda Online</h4>
+	      </div>
+	      <div class="modal-body">
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="nome">Nome</label>
+						<input type="text" class="form-control" name="nome" id="nome" placeholder="Ex: João da Silva" >
+						
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="email">Email</label>
+						<input type="email" placeholder="Ex: silva.jao@jao.com"  class="form-control" name="email" id="email">
+						
+					</div>
+
+					<div class="form-group col-md-2">
+						<label for="ddd">DDD</label>
+						<input type="text" placeholder="Ex: 11"  class="form-control" name="ddd" id="ddd">
+					</div>
+					
+					<div class="form-group col-md-2">
+						<label for="telefone">Telefone</label>
+						<input type="tel" placeholder="Ex: 99999-9999"  class="form-control" name="telefone" id="telefone">
+					</div>
+
+					<div class="form-group col-md-2">
+						<label for="tipo_telefone" name="tipo_telefone" id="tipo_telefone">Tipo Telefone</label>
+						<select class="form-control" name="tipo" id="tipo_telefone" required>
+						  <option value="">Selecione</option>
+						  <option value="residencial">Residencial</option>
+						  <option value="celular">Celular</option>
+						  <option value="comercial">Comercial</option>
+						</select>
+					</div>
+				</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Cancela</button>
+	        <button type="submit" class="btn btn-primary">Salve</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</form><!-- /.modal -->
+</template>
